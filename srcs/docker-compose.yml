@@ -1,29 +1,6 @@
 version: "3.9"  # optional since v1.27.0
 
 services:
-  ngnix:
-    build: requirements/nginx/.
-    image: ngnix:ngnix
-    container_name: "ngnix"
-    restart: always
-    networks:
-      - ineption
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - 'wordpress:/var/www/'
-  wordpress:
-    build: requirements/wordpress/.
-    image: wordpress:wordpress
-    container_name: "wordpress"
-    restart: always
-    networks:
-      - ineption
-    ports:
-      - "9000:9000"
-    volumes:
-      - 'wordpress:/var/www/'
   mariadb:
     build:
       context: requirements/mariadb/.
@@ -40,6 +17,29 @@ services:
       - .env
     volumes:
       - 'mariadb:/var/lib/mysql/'
+  wordpress:
+    build: requirements/wordpress/.
+    image: wordpress:wordpress
+    container_name: "wordpress"
+    restart: always
+    networks:
+      - ineption
+    ports:
+      - "9000:9000"
+    volumes:
+      - 'wordpress:/var/www/'
+  ngnix:
+    build: requirements/nginx/.
+    image: ngnix:ngnix
+    container_name: "ngnix"
+    restart: always
+    networks:
+      - ineption
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - 'wordpress:/var/www/'
 
 networks:   
   ineption:
