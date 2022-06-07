@@ -1,0 +1,59 @@
+version: "3.9"  # optional since v1.27.0
+
+services:
+  ngnix:
+    build: requirements/nginx/.
+    image: ngnix:ngnix
+    container_name: "ngnix"
+    restart: always
+    networks:
+      - ineption
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - 'wordpress:/var/www/'
+  wordpress:
+    build: requirements/wordpress/.
+    image: wordpress:wordpress
+    container_name: "wordpress"
+    restart: always
+    networks:
+      - ineption
+    ports:
+      - "9000:9000"
+    volumes:
+      - 'wordpress:/var/www/'
+  mariadb:
+    build:
+      context: requirements/mariadb/.
+      args:
+            DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    image: mariadb:mariadb
+    container_name: "mariadb"
+    restart: always
+    networks:
+      - ineption
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - 'mariadb:/var/lib/mysql/'
+
+networks:   
+  ineption:
+
+volumes:
+ wordpress:
+  driver: local
+  driver_opts:
+   o: bind
+   type: ext4
+   device: /home/melghoud/data/wordpress
+ mariadb:
+  driver: local
+  driver_opts:
+   o: bind
+   type: ext4
+   device: /home/melghoud/data/mariadb
