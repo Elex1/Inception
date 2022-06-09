@@ -17,7 +17,9 @@
 
 CREATE DATABASE wordpress; FLUSH PRIVILEGES;
 CREATE USER 'melghoud'@'%.%.%.%' IDENTIFIED BY 'qwerty1234'; FLUSH PRIVILEGES;
-GRANT ALL PRIVILEGES ON wordpress.* TO 'melghoud'@'%.%.%.%'; FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'melghoud'@'%.%.%.%'; FLUSH PRIVILEGES;
+CREATE USER 'melghoud2'@'%.%.%.%' IDENTIFIED BY 'qwerty1234'; FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON wordpress.* TO 'melghoud2'@'%.%.%.%'; FLUSH PRIVILEGES;
 
 USE wordpress;
 

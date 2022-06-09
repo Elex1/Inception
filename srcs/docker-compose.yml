@@ -10,7 +10,7 @@ services:
     container_name: "mariadb"
     restart: always
     networks:
-      - ineption
+      - inception
     ports:
       - "3306:3306"
     env_file:
@@ -23,26 +23,26 @@ services:
     container_name: "wordpress"
     restart: always
     networks:
-      - ineption
+      - inception
     ports:
       - "9000:9000"
     volumes:
       - 'wordpress:/var/www/'
-  ngnix:
+  nginx:
     build: requirements/nginx/.
-    image: ngnix:ngnix
-    container_name: "ngnix"
+    image: nginx:nginx
+    container_name: "nginx"
     restart: always
     networks:
-      - ineption
+      - inception
     ports:
-      - "80:80"
       - "443:443"
     volumes:
       - 'wordpress:/var/www/'
 
 networks:   
-  ineption:
+  inception:
+    driver: bridge
 
 volumes:
  wordpress:

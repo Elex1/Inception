@@ -15,4 +15,3 @@ ENTRYPOINT [ ! -d "/var/www/wordpress/" ] && wget -P /var/www/ https://wordpress
 			; mkdir -p /run/php/ \
 			; /usr/sbin/php-fpm7.3 -F -R
 
-#&& mv wp-config.php /var/www/wordpress/
